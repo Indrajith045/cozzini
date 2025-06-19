@@ -25,7 +25,7 @@ jobs:
         run: mvn clean package -DmuleDeploy 
       - name: Publish to Exchange 
         run: | 
-          mvn deploy --settings .settings/org.eclipse.core.resources.prefs -DskipMunitTests \ 
+          mvn deploy --settings .settings/settings.xml -DskipMunitTests \ 
           -Danypoint.username="${{ secrets.USER }}" \ 
           -Danypoint.password="${{ secrets.PASS }}" 
           
@@ -46,7 +46,7 @@ jobs:
 
       - name: Deploy to Dev 
         run: | 
-          mvn deploy --settings .settings/org.eclipse.core.resources.prefs -DskipMunitTests -DmuleDeploy \ 
+          mvn deploy --settings .settings/settings.xml -DskipMunitTests -DmuleDeploy \ 
           -Danypoint.username="${{ secrets.USER }}" \ 
           -Danypoint.password="${{ secrets.PASS }}" \ 
           -Danypoint.businessGroup="${{ secrets.ANYPOINT_ORG_ID }}" \ 
@@ -94,7 +94,7 @@ jobs:
         run: | 
           echo "Trying to deploy new version to UAT..." 
           # Uncomment this to simulate UAT failure and trigger rollback 
-          mvn deploy --settings .settings/org.eclipse.core.resources.prefs -DskipMunitTests -DmuleDeploy \ 
+          mvn deploy --settings .settings/settings.xml -DskipMunitTests -DmuleDeploy \ 
             -Danypoint.username="${{ secrets.USER }}" \ 
             -Danypoint.password="${{ secrets.PASS }}" \ 
             -Danypoint.businessGroup="${{ secrets.ANYPOINT_ORG_ID }}" \ 
